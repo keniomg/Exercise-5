@@ -1,0 +1,52 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace collectionTask2
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Queue<int> purchaseAmounts = FormListPurchaseAmounts();
+            ServeQueue(purchaseAmounts);
+        }
+
+        static Queue<int> FormListPurchaseAmounts()
+        {
+            Random random = new Random();
+            int minPurchaseAmount = 0;
+            int maxPurchaseAmount = 1000;
+            Queue<int> queue = new Queue<int>();
+            Console.WriteLine("Введите число покупателей в очереди:\n");
+            int queueCount = Convert.ToInt32(Console.ReadLine());
+
+            for (int i = 0; i < queueCount; i++)
+            {
+                queue.Enqueue(random.Next(minPurchaseAmount, maxPurchaseAmount));
+            }
+
+            return queue;
+        }
+
+        static void ServeQueue(Queue<int> purchaseAmounts)
+        {
+            int profit = 0;
+            Console.Clear();
+
+            while (purchaseAmounts.Count > 0)
+            {
+                Console.WriteLine($"Текущий покупатель заплатил за покупки: " +
+                    $"{purchaseAmounts.Peek()}");
+                profit += purchaseAmounts.Dequeue();
+                Console.WriteLine($"Покупателей ещё в очереди: {purchaseAmounts.Count}\nТекущая прибыль составляет: {profit}\nДля продолжения нажмите любую клавишу...\n");
+                Console.ReadKey();
+                Console.Clear();
+            }
+
+            Console.WriteLine("Общая сумма покупок: " + profit);
+        }
+    }
+}
