@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace collectionTask1
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            const string ExitCommand = "exit";
+
+            bool isContinue = true;
+
+            while (isContinue) 
+            {
+                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                Console.WriteLine("Введите искомое слово:\n");
+                dictionary.Add("Искусственный интеллект", " - это свойство искусственных интеллектуальных систем выполнять творческие функции, " +
+                    "\nкоторые традиционно считаются прерогативой человека");
+                string userInput = Console.ReadLine();
+                isContinue = CheckExit(userInput, ExitCommand);
+                SearchWordInDictionary(dictionary, userInput);
+            }
+        }
+
+        static void SearchWordInDictionary(Dictionary<string, string> dictionary, string word)
+        {
+            Console.Clear();
+
+            if (dictionary.ContainsKey(word))
+            {
+                Console.Write(word + dictionary[word] + "\n");
+            }
+            else
+            {
+                Console.Write("В словаре нет такого понятия.\n\n");
+            }
+        }
+
+        static bool CheckExit(string userInput, string ExitCommand)
+        {
+            if (userInput == ExitCommand)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+    }
+}
