@@ -1,0 +1,85 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace collectionTask3
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            const string ExitCommand = "exit";
+            const string SumCommand = "sum";
+
+            bool isContinue = true;
+            List<int> numbers = new List<int>();
+
+            while (isContinue)
+            {
+                Console.Clear();
+                DrawUserInterface(ExitCommand, SumCommand);
+                string userInput = Console.ReadLine();
+                HandleInput(ref numbers, ref isContinue, userInput, SumCommand, ExitCommand);
+            }
+        }
+
+        static void HandleInput(ref List<int> numbers, ref bool isContinue, string userInput, string sumCommand, string exitCommand)
+        {
+            if (int.TryParse(userInput, out int userNumber) == true)
+            {
+                AddNumber(ref numbers, userNumber);
+            }
+            else
+            {
+                if (userInput == sumCommand)
+                {
+                    SumNumbers(ref numbers);
+                }
+                else if (userInput == exitCommand)
+                {
+                    isContinue = false;
+                }
+            }
+        }
+
+        static void AddNumber(ref List<int> numbers, int userNumber)
+        {
+            Console.Clear();
+            numbers.Add(userNumber);
+            Console.SetCursorPosition(3, 1);
+            Console.WriteLine("Число добавлено! Нажмите любую клавишу, чтобы продолжить...\n");
+            Console.SetCursorPosition(3, 3);
+            Console.ReadKey();
+        }
+
+        static void SumNumbers(ref List<int> numbers)
+        {
+            Console.Clear();
+            int sumNumbers = 0;
+
+            foreach (int number in numbers)
+            {
+                sumNumbers += number;
+            }
+
+            Console.SetCursorPosition(3, 1);
+            Console.WriteLine($"Сумма введенных чисел равна: {sumNumbers}. Чтобы продолжить нажмите любую клавишу...\n");
+            Console.SetCursorPosition(3, 3);
+            numbers.Clear();
+            Console.ReadKey();
+        }
+
+        static void DrawUserInterface(string exitCommand, string sumCommand)
+        {
+            Console.SetCursorPosition(3, 1);
+            Console.WriteLine("Введите число или команду:");
+            Console.SetCursorPosition(3, 7);
+            Console.WriteLine($"'{exitCommand}' - выход");
+            Console.SetCursorPosition(3, 8);
+            Console.WriteLine($"'{sumCommand}' - суммировать введённые числа");
+            Console.SetCursorPosition(3, 3);
+        }
+    }
+}
