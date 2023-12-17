@@ -12,33 +12,28 @@ namespace collectionTask1
         {
             string exitCommand = "exit";
             string userInput = null;
+            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+            dictionary.Add("Искусственный интеллект", " - это свойство искусственных интеллектуальных систем выполнять творческие функции, " +
+                "\nкоторые традиционно считаются прерогативой человека");
 
             while (userInput != exitCommand) 
             {
-                Dictionary<string, string> dictionary = new Dictionary<string, string>();
                 Console.WriteLine("Введите искомое слово:\n");
-                dictionary.Add("Искусственный интеллект", " - это свойство искусственных интеллектуальных систем выполнять творческие функции, " +
-                    "\nкоторые традиционно считаются прерогативой человека");
                 userInput = Console.ReadLine();
-                SearchWordInDictionary(dictionary, userInput, exitCommand);
-            }
-        }
+                Console.Clear();
 
-        static void SearchWordInDictionary(Dictionary<string, string> dictionary, string word, string exitCommand)
-        {
-            Console.Clear();
-
-            if (dictionary.ContainsKey(word))
-            {
-                Console.Write(word + dictionary[word] + "\n\n");
-            }
-            else if (word == exitCommand)
-            {
-                Console.WriteLine("Вы вышли из программы.\n");
-            }
-            else
-            {
-                Console.Write("В словаре нет такого понятия.\n\n");
+                if (dictionary.ContainsKey(userInput))
+                {
+                    Console.Write(userInput + dictionary[userInput] + "\n\n");
+                }
+                else if (userInput == exitCommand)
+                {
+                    Console.WriteLine("Вы вышли из программы.\n");
+                }
+                else
+                {
+                    Console.Write("В словаре нет такого понятия.\n\n");
+                }
             }
         }
     }
