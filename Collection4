@@ -1,0 +1,124 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace collectionTask4
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string exitCommand = "exit";
+
+            string userInput = null;
+            Dictionary<string, string> employees = new Dictionary<string, string>();
+
+            while (userInput != exitCommand)
+            {
+                DrawUserInterface();
+                userInput = Console.ReadLine();
+                Console.Clear();
+                HandleInput(userInput, ref employees);
+            }
+        }
+
+        static void DrawUserInterface()
+        {
+            Console.Clear();
+            string addDossierCommand = "1";
+            string deleteDossierCommand = "2";
+            string writeDossierCommand = "3";
+            string exitCommand = "exit";
+            Console.SetCursorPosition(0, 0);
+            Console.WriteLine("Введите одну из команд:");
+            Console.SetCursorPosition(0, 5);
+            Console.WriteLine($"'{addDossierCommand}' - добавить досье.\n'{deleteDossierCommand}' - удалить досье." +
+                $"\n'{writeDossierCommand}' - вывести все досье.\n'{exitCommand}' - выйти из программы.");
+            Console.SetCursorPosition(0, 2);
+        }
+
+        static void HandleInput(string userInput, ref Dictionary<string, string> employees)
+        {
+            const string AddDossierCommand = "1";
+            const string DeleteDossierCommand = "2";
+            const string WriteDossierCommand = "3";
+
+            Console.Clear();
+
+            switch (userInput)
+            {
+                case AddDossierCommand:
+                    AddDossier(ref employees);
+                    break;
+
+                case DeleteDossierCommand:
+                    DeleteDossier(ref employees);
+                    break;
+
+                case WriteDossierCommand:
+                    WriteDossier(employees);
+                    break;
+            }
+        }
+
+        static void AddDossier(ref Dictionary<string, string> employees)
+        {
+            Console.WriteLine("Введите ФИО сотрудника:\n");
+            string employeeFullname = Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine("Введите должность сотрудника:\n");
+            string jobTitle = Console.ReadLine();
+            Console.Clear();
+            employees.Add(employeeFullname, jobTitle);
+            Console.WriteLine("Досье добавлено! Чтобы продолжить нажмите любую клавишу...");
+            Console.ReadKey();
+        }
+
+        static void DeleteDossier(ref Dictionary<string, string> employees)
+        {
+            if (employees.Count >= 1)
+            {
+                Console.WriteLine("Введите ФИО сотрудника, досье которого хотите удалить:\n");
+                string employeeFullname = Console.ReadLine();
+                Console.Clear();
+
+                if (employees.ContainsKey(employeeFullname))
+                {
+                    employees.Remove(employeeFullname);
+                    Console.WriteLine("Досье сотрудника удалено.");
+                }
+                else
+                {
+                    Console.WriteLine("Такого досье нет.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("В базе нет ни одного досье.");
+            }
+
+            Console.WriteLine("\nЧтобы продолжить нажмите любую клавишу...");
+            Console.ReadKey();
+        }
+
+        static void WriteDossier(Dictionary<string, string> employees)
+        {
+            if (employees.Count >=1)
+            {
+                foreach (KeyValuePair<string, string> employee in employees)
+                {
+                    Console.WriteLine($"{employee.Key} - {employee.Value}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("В базе нет ни одного досье.");
+            }
+
+            Console.WriteLine("\nЧтобы продолжить нажмите любую клавишу...");
+            Console.ReadKey();
+        }
+    }
+}
