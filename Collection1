@@ -10,22 +10,21 @@ namespace collectionTask1
     {
         static void Main(string[] args)
         {
-            const string ExitCommand = "exit";
-
+            string exitCommand = "exit";
             string userInput = null;
 
-            while (IsContinue(userInput, ExitCommand)) 
+            while (userInput != exitCommand) 
             {
                 Dictionary<string, string> dictionary = new Dictionary<string, string>();
                 Console.WriteLine("Введите искомое слово:\n");
                 dictionary.Add("Искусственный интеллект", " - это свойство искусственных интеллектуальных систем выполнять творческие функции, " +
                     "\nкоторые традиционно считаются прерогативой человека");
                 userInput = Console.ReadLine();
-                SearchWordInDictionary(dictionary, userInput);
+                SearchWordInDictionary(dictionary, userInput, exitCommand);
             }
         }
 
-        static void SearchWordInDictionary(Dictionary<string, string> dictionary, string word)
+        static void SearchWordInDictionary(Dictionary<string, string> dictionary, string word, string exitCommand)
         {
             Console.Clear();
 
@@ -33,21 +32,13 @@ namespace collectionTask1
             {
                 Console.Write(word + dictionary[word] + "\n\n");
             }
+            else if (word == exitCommand)
+            {
+                Console.WriteLine("Вы вышли из программы.\n");
+            }
             else
             {
                 Console.Write("В словаре нет такого понятия.\n\n");
-            }
-        }
-
-        static bool IsContinue(string userInput, string ExitCommand)
-        {
-            if (userInput == ExitCommand)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
             }
         }
     }
