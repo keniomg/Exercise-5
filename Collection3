@@ -10,18 +10,17 @@ namespace collectionTask3
     {
         static void Main(string[] args)
         {
-            const string ExitCommand = "exit";
-            const string SumCommand = "sum";
-
+            string exitCommand = "exit";
+            string sumCommand = "sum";
             bool isContinue = true;
             List<int> numbers = new List<int>();
 
             while (isContinue)
             {
                 Console.Clear();
-                DrawUserInterface(ExitCommand, SumCommand);
+                DrawUserInterface(exitCommand, sumCommand);
                 string userInput = Console.ReadLine();
-                HandleInput(ref numbers, ref isContinue, userInput, SumCommand, ExitCommand);
+                HandleInput(ref numbers, ref isContinue, userInput, sumCommand, exitCommand);
             }
         }
 
