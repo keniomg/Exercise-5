@@ -58,12 +58,21 @@ namespace collectionTask4
             Console.WriteLine("Введите ФИО сотрудника:\n");
             string employeeFullname = Console.ReadLine();
             Console.Clear();
-            Console.WriteLine("Введите должность сотрудника:\n");
-            string jobTitle = Console.ReadLine();
-            Console.Clear();
-            employees.Add(employeeFullname, jobTitle);
-            Console.WriteLine("Досье добавлено! Чтобы продолжить нажмите любую клавишу...");
-            Console.ReadKey();
+
+            if (employees.ContainsKey(employeeFullname) == false)
+            {
+                Console.WriteLine("Введите должность сотрудника:\n");
+                string jobTitle = Console.ReadLine();
+                Console.Clear();
+                employees.Add(employeeFullname, jobTitle);
+                Console.WriteLine("Досье добавлено!");
+            }
+            else
+            {
+                Console.WriteLine("Досье с таким ФИО уже есть в базе данных!");
+            }
+
+            ReadKeyForContinue();
         }
 
         static void DeleteDossier(Dictionary<string, string> employees)
@@ -89,13 +98,12 @@ namespace collectionTask4
                 Console.WriteLine("В базе нет ни одного досье.");
             }
 
-            Console.WriteLine("\nЧтобы продолжить нажмите любую клавишу...");
-            Console.ReadKey();
+            ReadKeyForContinue();
         }
 
         static void WriteDossier(Dictionary<string, string> employees)
         {
-            if (employees.Count >=1)
+            if (employees.Count >= 1)
             {
                 foreach (KeyValuePair<string, string> employee in employees)
                 {
@@ -107,6 +115,11 @@ namespace collectionTask4
                 Console.WriteLine("В базе нет ни одного досье.");
             }
 
+            ReadKeyForContinue();
+        }
+
+        static void ReadKeyForContinue()
+        {
             Console.WriteLine("\nЧтобы продолжить нажмите любую клавишу...");
             Console.ReadKey();
         }
