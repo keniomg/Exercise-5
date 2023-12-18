@@ -1,8 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace collectionTask3
 {
@@ -17,33 +14,27 @@ namespace collectionTask3
 
             while (isContinue)
             {
-                Console.Clear();
                 DrawUserInterface(exitCommand, sumCommand);
                 string userInput = Console.ReadLine();
-                HandleInput(ref numbers, ref isContinue, userInput, sumCommand, exitCommand);
-            }
-        }
 
-        static void HandleInput(ref List<int> numbers, ref bool isContinue, string userInput, string sumCommand, string exitCommand)
-        {
-            if (int.TryParse(userInput, out int userNumber) == true)
-            {
-                AddNumber(ref numbers, userNumber);
-            }
-            else
-            {
                 if (userInput == sumCommand)
                 {
-                    SumNumbers(ref numbers);
+                    SumNumbers(numbers);
                 }
                 else if (userInput == exitCommand)
                 {
                     isContinue = false;
                 }
+                else if (int.TryParse(userInput, out int userNumber) == true)
+                {
+                    AddNumber(numbers, userNumber);
+                }
+                
+                Console.Clear();
             }
         }
 
-        static void AddNumber(ref List<int> numbers, int userNumber)
+        static void AddNumber(List<int> numbers, int userNumber)
         {
             Console.Clear();
             numbers.Add(userNumber);
@@ -53,7 +44,7 @@ namespace collectionTask3
             Console.ReadKey();
         }
 
-        static void SumNumbers(ref List<int> numbers)
+        static void SumNumbers(List<int> numbers)
         {
             Console.Clear();
             int sumNumbers = 0;
@@ -66,7 +57,6 @@ namespace collectionTask3
             Console.SetCursorPosition(3, 1);
             Console.WriteLine($"Сумма введенных чисел равна: {sumNumbers}. Чтобы продолжить нажмите любую клавишу...\n");
             Console.SetCursorPosition(3, 3);
-            numbers.Clear();
             Console.ReadKey();
         }
 
