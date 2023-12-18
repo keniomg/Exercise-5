@@ -1,8 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace collectionTask4
 {
@@ -10,6 +7,10 @@ namespace collectionTask4
     {
         static void Main(string[] args)
         {
+            const string AddDossierCommand = "1";
+            const string DeleteDossierCommand = "2";
+            const string WriteDossierCommand = "3";
+
             string exitCommand = "exit";
             string userInput = null;
             Dictionary<string, string> employees = new Dictionary<string, string>();
@@ -19,7 +20,21 @@ namespace collectionTask4
                 DrawUserInterface();
                 userInput = Console.ReadLine();
                 Console.Clear();
-                HandleInput(userInput, ref employees);
+
+                switch (userInput)
+                {
+                    case AddDossierCommand:
+                        AddDossier(employees);
+                        break;
+
+                    case DeleteDossierCommand:
+                        DeleteDossier(employees);
+                        break;
+
+                    case WriteDossierCommand:
+                        WriteDossier(employees);
+                        break;
+                }
             }
         }
 
@@ -38,31 +53,7 @@ namespace collectionTask4
             Console.SetCursorPosition(0, 2);
         }
 
-        static void HandleInput(string userInput, ref Dictionary<string, string> employees)
-        {
-            const string AddDossierCommand = "1";
-            const string DeleteDossierCommand = "2";
-            const string WriteDossierCommand = "3";
-
-            Console.Clear();
-
-            switch (userInput)
-            {
-                case AddDossierCommand:
-                    AddDossier(ref employees);
-                    break;
-
-                case DeleteDossierCommand:
-                    DeleteDossier(ref employees);
-                    break;
-
-                case WriteDossierCommand:
-                    WriteDossier(employees);
-                    break;
-            }
-        }
-
-        static void AddDossier(ref Dictionary<string, string> employees)
+        static void AddDossier(Dictionary<string, string> employees)
         {
             Console.WriteLine("Введите ФИО сотрудника:\n");
             string employeeFullname = Console.ReadLine();
@@ -75,7 +66,7 @@ namespace collectionTask4
             Console.ReadKey();
         }
 
-        static void DeleteDossier(ref Dictionary<string, string> employees)
+        static void DeleteDossier(Dictionary<string, string> employees)
         {
             if (employees.Count >= 1)
             {
